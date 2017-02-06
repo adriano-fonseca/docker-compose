@@ -1,0 +1,21 @@
+
+
+app:
+  build: ./wildfly
+  ports:
+   - "8080:8080"
+   - "9990:9990"
+  links:
+        - postgres:postgres
+
+postgres:
+    build: ./postgres
+    ports:
+        - "5432:5432"
+    environment:
+        - DEBUG=false
+        - DB_USER=app
+        - DB_PASS=app
+        - DB_NAME=app
+    volumes:
+        - ./postgresql:/var/lib/postgresql
